@@ -1,0 +1,132 @@
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+xsi:type="MailApp">
+
+  <Id>e7b5a3d1-9c4f-4e8b-b2a6-1f3d7e9c5a82</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>MCSL</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+
+  <DisplayName DefaultValue="CRM Sidebar"/>
+  <Description DefaultValue="CRM integration in Outlook."/>
+
+  <IconUrl DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/assets/icon-32.png"/>
+  <HighResolutionIconUrl DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/assets/icon-128.png"/>
+
+  <SupportUrl DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/support.html"/>
+
+  <AppDomains>
+    <AppDomain>https://apps.merinoservices.com</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.3"/>
+    </Sets>
+  </Requirements>
+
+  <!-- REQUIRED -->
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/dist/taskpane/index.html"/>
+        <RequestedHeight>450</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteMailbox</Permissions>
+
+  <!-- REQUIRED FOR EXCHANGE VALIDATION -->
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides"
+  xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="MailHost">
+        <DesktopFormFactor>
+
+          <!-- READ BUTTON -->
+          <ExtensionPoint xsi:type="MessageReadCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgReadGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="openPane">
+                  <Label resid="Button.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Label"/>
+                    <Description resid="Button.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+          <!-- COMPOSE BUTTON -->
+          <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+            <OfficeTab id="TabDefault">
+              <Group id="msgComposeGroup">
+                <Label resid="GroupLabel"/>
+                <Control xsi:type="Button" id="openPaneCompose">
+                  <Label resid="Button.Label"/>
+                  <Supertip>
+                    <Title resid="Button.Label"/>
+                    <Description resid="Button.Tooltip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16"/>
+                    <bt:Image size="32" resid="Icon.32"/>
+                    <bt:Image size="80" resid="Icon.80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <SourceLocation resid="Taskpane.Url"/>
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16" DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/assets/icon-16.png"/>
+        <bt:Image id="Icon.32" DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/assets/icon-32.png"/>
+        <bt:Image id="Icon.80" DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/assets/icon-80.png"/>
+      </bt:Images>
+
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://apps.merinoservices.com/crm-api/office-plugin/dist/taskpane/index.html"/>
+      </bt:Urls>
+
+      <bt:ShortStrings>
+        <bt:String id="GroupLabel" DefaultValue="CRM"/>
+        <bt:String id="Button.Label" DefaultValue="CRM Sidebar"/>
+      </bt:ShortStrings>
+
+      <bt:LongStrings>
+        <bt:String id="Button.Tooltip" DefaultValue="Open CRM sidebar"/>
+      </bt:LongStrings>
+    </Resources>
+
+  </VersionOverrides>
+
+</OfficeApp>
